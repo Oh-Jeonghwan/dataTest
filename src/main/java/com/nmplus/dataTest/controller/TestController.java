@@ -14,6 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.nmplus.dataTest.vo.Board;
 import com.nmplus.dataTest.vo.UploadVo;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/test")
 public class TestController {
@@ -22,26 +25,35 @@ public class TestController {
 		return "edit";
 	}
 	
+	@GetMapping("/getForm")
+	public String getForm(Board board){
+		
+		return "redirect:/test/form";
+	}
+	
 	@PostMapping("/basicForm")
 	public String basicForm(@RequestParam String name
 						  , @RequestParam String hobby){
 		
-		return "edit";
+		return "redirect:/test/form";
 	}
 	
 	@PostMapping("/multiForm")
-	public String multiForm(@RequestParam String title,
-							@RequestParam String content,
-							@RequestPart MultipartFile[] upfile) {
+	public String multiForm( @RequestPart MultipartFile[] upfile
+						  //, @RequestPart UploadVo uploadVo
+						  ) {
 		//@ReuqestParam은 파일을 받을 수 있다.
 		//@RequestBody로 보낼 때는 json 형식의 ContentType와 자바단에 생성자가 있는 데이터만 받는다?
-		return "edit";
+	//	Long length = uploadVo.getUpfile().get(0).getSize();
+		Long length = upfile[0].getSize();
+		log.debug("asdf: " + length);
+		return "redirect:/test/form";
 	}
 	
 	@PostMapping("/consBasicForm")
 	public String consBasicForm(@ModelAttribute Board board) {
 		//ModelAttribute는 setter가 없다면 값이 보내지기는 하지만 보내진 값이 쓰여지지 않아 null로 들어오게 된다.
-		return "edit";
+		return "redirect:/test/form";
 	}
 	
 	@ResponseBody

@@ -9,6 +9,13 @@
     <title th:text="${title}">Hello SpringBoot!</title>
 </head>
 <body>
+	<!--form get 방식  -->
+	<form th:action="@{/test/getForm}" method="get">
+		<input type="text" name="title">
+		<input type="text" name="content">
+		<button>확인</button>
+	</form>
+	<br><br>
 	<!--생성자가 없는 기본 폼 파일 -->
 	<form th:action="@{/test/basicForm}" id="basic" method="post">
 		<input type="text" name="name">
@@ -31,6 +38,7 @@
 		<button>확인</button>
 	</form>
 	<br><br>
+	<!-- 생성자가 있는 기본타입 폼 -->
 	<form method="post" th:action="@{/test/consBasicForm}">
 		<input type="text" name="title">
 		<input type="text" name="content">
@@ -41,7 +49,13 @@
 	<form id="requestBody" th:action="@{/test/requestBody}" method="post">
 		<input type="text" name="title" id="title">
 		<input type="text" name="content" id="content">
-		<button type="submit" th:onclick="javascript:board.clickSubmit();">확인</button>
+		<button type="button" th:onclick="javascript:board.clickSubmit();">확인</button>
+	</form>
+	<br><br>
+	<form id="ajaxGet">
+		<input type="text" name="title" id="agtitle">
+		<input type="text" name="content" id="agcontent">
+		<button type="button" th:onclick="javascript:board.ajaxGet();">확인</button>
 	</form>
 	
 	

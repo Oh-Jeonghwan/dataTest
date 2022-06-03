@@ -10,18 +10,24 @@ let board = {
 		$.ajax({
 			url:"/test/requestBody",
 			type:"post",
-			data:JSON.stringify({
-				title:title,
-				content:content
-			}),
+			data:JSON.stringify(formData),
 			contentType:"application/json; charset=utf-8",
 			dataType:"json",
 			success:function(data){
 				alert(data);
+				location.href="/test/form";
 			},
 			error:function(data){
 				console.log(data);
 			}
+		});
+	},
+	
+	ajaxGet:function(){
+		let title = $("#agtitle").val();
+		let content = $("#agcontent").val();
+		$.ajax({
+			url:"/test/ajaxGet",
 		});
 	}
 }
