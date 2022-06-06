@@ -24,10 +24,23 @@ let board = {
 	},
 	
 	ajaxGet:function(){
-		let title = $("#agtitle").val();
-		let content = $("#agcontent").val();
+		let form = $("#ajaxGet")[0];
+		let formData = new FormData(form);
+		console.log(formData);
 		$.ajax({
 			url:"/test/ajaxGet",
+			type:"get",
+			data:formData, 
+			//이게 뭐?
+			//contentType: false, 
+			processData: false, 
+			//cache: false, 
+			success:function(data){
+				alert(data);
+			},
+			error:function(data){
+				console.log(data);
+			}
 		});
 	}
 }
