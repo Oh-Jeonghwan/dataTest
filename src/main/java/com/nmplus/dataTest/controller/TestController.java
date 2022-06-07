@@ -34,7 +34,6 @@ public class TestController {
 	@PostMapping("/basicForm")
 	public String basicForm(@RequestParam String name
 						  , @RequestParam String hobby){
-		
 		return "redirect:/test/form";
 	}
 	
