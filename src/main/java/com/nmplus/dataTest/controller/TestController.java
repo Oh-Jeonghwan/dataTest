@@ -34,6 +34,7 @@ public class TestController {
 	@GetMapping("/basicForm")
 	public String basicForm(@RequestParam String title
 						  , @RequestParam String content){
+
 		return "redirect:/test/form";
 	}
 	
@@ -49,9 +50,10 @@ public class TestController {
 		return "redirect:/test/form";
 	}
 	
-	@PostMapping("/consBasicForm")
+	@GetMapping("/consBasicForm")
 	public String consBasicForm(@ModelAttribute Board board) {
 		//ModelAttribute는 setter가 없다면 값이 보내지기는 하지만 보내진 값이 쓰여지지 않아 null로 들어오게 된다.
+		log.debug("board: "+board);
 		return "redirect:/test/form";
 	}
 	
@@ -75,5 +77,4 @@ public class TestController {
 		//Board board = new Board(title, content);
 		return board;
 	}
-	
 }
