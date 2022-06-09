@@ -31,9 +31,9 @@ public class TestController {
 		return "redirect:/test/form";
 	}
 	
-	@PostMapping("/basicForm")
-	public String basicForm(@RequestParam String name
-						  , @RequestParam String hobby){
+	@GetMapping("/basicForm")
+	public String basicForm(@RequestParam String title
+						  , @RequestParam String content){
 		return "redirect:/test/form";
 	}
 	
@@ -57,16 +57,22 @@ public class TestController {
 	
 	@ResponseBody
 	@PostMapping("/requestBody")
-	public Board requestBody(@RequestBody Board board) {
+	public Board requestBody(@RequestPart Board board) {
 		//submit=>값이 찍히긴 하지만 415 오류 json이 아니리서 requestBody가 파싱 못 해줌
 		return board;
 	}
 	
 	@ResponseBody
 	@GetMapping("/ajaxGet")
-	public Board ajaxGet(Board board) {
-		//submit=>값이 찍히긴 하지만 415 오류 json이 아니리서 requestBody가 파싱 못 해줌
-		log.debug("board: "+ board.toString());
+	public Board ajaxGet(@RequestBody Board board) {
+		//Board board = new Board(title, content);
+		return board;
+	}
+	
+	@ResponseBody
+	@GetMapping("/multiget")
+	public Board multiget(@ModelAttribute Board board) {
+		//Board board = new Board(title, content);
 		return board;
 	}
 	

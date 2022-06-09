@@ -3,16 +3,18 @@
  */
 let board = {
 	clickSubmit:function(){
-		let form = $("#requestBody")[0];
-		let formData = new FormData(form);
-		let title = $("#title").val();
-		let content = $("#content").val();
+		let data={
+			"title":$("#title").val(),
+			"content":$("#content").val()
+		}
+		console.log(JSON.stringify(data));
 		$.ajax({
 			url:"/test/requestBody",
 			type:"post",
-			data:JSON.stringify(formData),
+			data:JSON.stringify(data),
 			contentType:"application/json; charset=utf-8",
 			dataType:"json",
+			processData: false,
 			success:function(data){
 				alert(data);
 				location.href="/test/form";
@@ -24,19 +26,52 @@ let board = {
 	},
 	
 	ajaxGet:function(){
-		let form = $("#ajaxGet")[0];
-		let formData = new FormData(form);
-		console.log(formData);
+		let title=$("#agtitle").val();
+		let content=$("#agcontent").val();
+		let data = {title:title, content:content};
+		let parseData = JSON.stringify(data);
+		console.log(parseData);
 		$.ajax({
 			url:"/test/ajaxGet",
 			type:"get",
-			data:formData, 
+			//data:data,
+			data:data,
+			contentType:"application/json; charset=utf-8", 
 			//이게 뭐?
-			//contentType: false, 
-			processData: false, 
-			//cache: false, 
+			//contentType: false,
+			//processData: false, 
+			//cache: false,
+			dataType:"json", 
 			success:function(data){
 				alert(data);
+				location.href="/test/form";
+			},
+			error:function(data){
+				console.log(data);
+			}
+		});
+	},
+	
+	multiget:function(){
+		let data={
+			title:$("#mtitle").val(),
+			content:$("#mcontent").val()
+		}
+		console.log(JSON.stringify(data));
+		$.ajax({
+			url:"/test/multiget",
+			type:"get",
+			//data:data,
+			data:data,
+			//contentType:"application/json; charset=utf-8", 
+			//이게 뭐?
+			//contentType: false,
+			//processData: false, 
+			//cache: false,
+			dataType:"json", 
+			success:function(data){
+				alert(data);
+				location.href="/test/form";
 			},
 			error:function(data){
 				console.log(data);

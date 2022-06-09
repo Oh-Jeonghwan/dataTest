@@ -46,7 +46,7 @@
 	</form>
 	<br><br>
 	<!-- ajax로 requestBody 보내기 -->
-	<form id="requestBody" th:action="@{/test/requestBody}" method="post">
+	<form id="requestBody" th:action="@{/test/requestBody}" method="get">
 		<input type="text" name="title" id="title">
 		<input type="text" name="content" id="content">
 		<button type="button" th:onclick="javascript:board.clickSubmit();">확인</button>
@@ -56,6 +56,13 @@
 		<input type="text" name="title" id="agtitle">
 		<input type="text" name="content" id="agcontent">
 		<button type="button" th:onclick="javascript:board.ajaxGet();">확인</button>
+	</form>
+	<br><br>
+	<form th:action="@{/test/multiget}" id="basic" method="post">
+		<input type="text" name="title" id="mtitle">
+		<input type="text" name="content" id="mcontent">
+		<button type="button" th:onclick="javascript:board.multiget();">ajax확인</button>
+		<button>확인</button>
 	</form>
 	
 	
