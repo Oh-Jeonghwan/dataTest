@@ -72,7 +72,8 @@ let board = {
 			success:function(data){
 				alert(data);
 				location.href="/test/form";
-			},
+		
+	
 			error:function(data){
 				console.log(data);
 			}
