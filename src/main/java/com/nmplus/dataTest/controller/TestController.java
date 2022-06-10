@@ -31,7 +31,7 @@ public class TestController {
 		return "redirect:/test/form";
 	}
 	
-	@GetMapping("/basicForm")
+	@PostMapping("/basicForm")
 	public String basicForm(@RequestParam String title
 						  , @RequestParam String content){
 
@@ -48,6 +48,13 @@ public class TestController {
 		Long length = upfile[0].getSize();
 		log.debug("asdf: " + length);
 		return "redirect:/test/form";
+	}
+	
+	@PostMapping("/formData")
+	public Board formData(@RequestParam String title
+						, @RequestParam String content) {
+		Board board = new Board(title, content);
+		return board;
 	}
 	
 	@GetMapping("/consBasicForm")

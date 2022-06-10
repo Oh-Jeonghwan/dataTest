@@ -72,8 +72,29 @@ let board = {
 			success:function(data){
 				alert(data);
 				location.href="/test/form";
-		
+			},
+			error:function(data){
+				console.log(data);
+			}
+		});
+	},
 	
+	formData:function(){
+		let form = $("#formData")[0];
+		let formData = new FormData(form);
+		console.log(formData);
+		$.ajax({
+			url:"/test/formData",
+			type:"post",
+			data: formData,
+			cache:false,
+			chtentType:false,
+			processData:false,
+			dataType:"json",
+			success:function(data){
+					alert(data);
+				location.href="/test/form";
+			},
 			error:function(data){
 				console.log(data);
 			}
