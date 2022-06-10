@@ -57,7 +57,7 @@ public class TestController {
 	
 	@ResponseBody
 	@PostMapping("/requestBody")
-	public Board requestBody(@RequestPart Board board) {
+	public Board requestBody(@RequestBody Board board) {
 		//submit=>값이 찍히긴 하지만 415 오류 json이 아니리서 requestBody가 파싱 못 해줌
 		return board;
 	}
