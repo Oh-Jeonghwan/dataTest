@@ -39,7 +39,10 @@ public class TestController {
 	}
 	
 	@PostMapping("/multiForm")
-	public String multiForm( @RequestPart MultipartFile[] upfile
+	public String multiForm(@RequestParam String title,
+							@RequestParam String content,
+							@RequestPart MultipartFile[] upfile
+						   //,@ModelAttribute Board board 
 						  //, @RequestPart UploadVo uploadVo
 						  ) {
 		//@ReuqestParam은 파일을 받을 수 있다.
@@ -50,9 +53,11 @@ public class TestController {
 		return "redirect:/test/form";
 	}
 	
+	@ResponseBody
 	@PostMapping("/formData")
-	public Board formData(@RequestParam String title
-						, @RequestParam String content) {
+	public Board formData(@RequestParam("title") String title,
+						  @RequestParam("content") String content,
+						  @RequestParam("upfile")MultipartFile[] upfile) {
 		Board board = new Board(title, content);
 		return board;
 	}
@@ -66,7 +71,8 @@ public class TestController {
 	
 	@ResponseBody
 	@PostMapping("/requestBody")
-	public Board requestBody(@RequestBody Board board) {
+	public Board requestBody(@RequestBody Board board
+							, @RequestBody MultipartFile[] upfile) {
 		//submit=>값이 찍히긴 하지만 415 오류 json이 아니리서 requestBody가 파싱 못 해줌
 		return board;
 	}
@@ -79,8 +85,9 @@ public class TestController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/multiget")
-	public Board multiget(@ModelAttribute Board board) {
+	@PostMapping("/multiget")
+	public Board multiget(@ModelAttribute Board board
+						, @ModelAttribute MultipartFile[] upfile) {
 		//Board board = new Board(title, content);
 		return board;
 	}
