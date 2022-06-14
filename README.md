@@ -7,7 +7,7 @@
 
 - @RequestParam은 파일을 받을 수도 있다.
 
-### 1. Get 방식으로 보낼 떄 콘텐트 타입에 따른 차이점(콘텐트 타입: Multipart/form-data, form-urlencoded, json)
+### 1. Get 방식으로 보낼 때 콘텐트 타입에 따른 차이점(콘텐트 타입: Multipart/form-data, form-urlencoded, json)
 - 넘겨주는 뷰단: 일반적인 폼형식 
 
   ![get 요청 시 html](https://user-images.githubusercontent.com/98066327/173469725-9b08ebe5-6e1d-487f-bd00-388e9495bb9d.png)
