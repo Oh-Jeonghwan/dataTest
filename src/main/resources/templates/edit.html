@@ -10,57 +10,70 @@
 </head>
 <body>
 	<!--form get 방식  -->
+	<p>기본 form get 방식</p>
 	<form th:action="@{/test/getForm}" method="get">
 		<input type="text" name="title">
 		<input type="text" name="content">
 		<button>확인</button>
 	</form>
-	<br><br>
+	<br>
 	<!--생성자가 없는 기본 폼 파일 -->
+	<p>기본 form post 방식</p>
 	<form th:action="@{/test/basicForm}" id="basic" method="post">
 		<input type="text" name="title">
 		<input type="text" name="content">
 		<button>확인</button>
 	</form>
-	<br><br>
-	<!-- 멀티파트 폼 파일 -->
+	<br>
+	<p> 멀티파트 폼 파일 </p>
 	<form enctype="multipart/form-data" method="post" th:action="@{/test/multiForm}">
 		<input type="text" name="title">
 		<input type="text" name="content">
 		<input type="file" name="upfile">
 		<button>확인</button>
 	</form>
-	<br><br>
-	<!-- 생성자가 있는 기본타입 폼 -->
-	<form method="post" th:action="@{/test/argsBasicForm}">
+	<br>
+	<p>jquery formdata로 넘기기 </p>
+	<form method="post" th:action="@{/test/formData}" id="formData">
 		<input type="text" name="title">
 		<input type="text" name="content">
-		<button>확인</button>
+		<input type="file" name="upfile">
+		<button type="button" th:onclick="javascript:board.formData();">확인</button>
 	</form>
+<<<<<<< HEAD
 	<br><br>
 	<!-- 생성자가 있는 기본타입 폼 -->
 	<form method="get" th:action="@{/test/consBasicForm}">
+=======
+	<br>
+	<p>생성자가 있는 기본타입 폼(requestbody, modelattribute)</p>
+	<form method="post" th:action="@{/test/consBasicForm}">
+>>>>>>> d8ed4381ab6850e99737bddb6100c94752ff56ed
 		<input type="text" name="title">
 		<input type="text" name="content">
 		<button>확인</button>
 	</form>
-	<br><br>
-	<!-- ajax로 requestBody 보내기 -->
-	<form id="requestBody" th:action="@{/test/requestBody}" method="get">
+	<br>
+	<p> ajax로 requestBody 보내기 </p>
+	<form id="requestBody" th:action="@{/test/requestBody}" method="post">
 		<input type="text" name="title" id="title">
 		<input type="text" name="content" id="content">
-		<button type="button" th:onclick="javascript:board.clickSubmit();">확인</button>
+		<input type="file" name="upfile" id="upfile">
+		<button>확인</button>
+		<button type="button" th:onclick="javascript:board.requestBody();">ajax확인</button>
 	</form>
-	<br><br>
+	<br>
+	<p>ajax get</p>
 	<form id="ajaxGet">
 		<input type="text" name="title" id="agtitle">
 		<input type="text" name="content" id="agcontent">
 		<button type="button" th:onclick="javascript:board.ajaxGet();">확인</button>
 	</form>
-	<br><br>
-	<form th:action="@{/test/multiget}" id="basic" method="post">
+	<br>
+	<form th:action="@{/test/multiget}" id="multiGet" method="post" enctype="multipart/form-data">
 		<input type="text" name="title" id="mtitle">
 		<input type="text" name="content" id="mcontent">
+		<input type="file" name="upfile" id="mupfile">
 		<button type="button" th:onclick="javascript:board.multiget();">ajax확인</button>
 		<button>확인</button>
 	</form>

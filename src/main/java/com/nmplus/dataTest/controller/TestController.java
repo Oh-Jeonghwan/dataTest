@@ -31,7 +31,7 @@ public class TestController {
 		return "redirect:/test/form";
 	}
 	
-	@GetMapping("/basicForm")
+	@PostMapping("/basicForm")
 	public String basicForm(@RequestParam String title
 						  , @RequestParam String content){
 		log.debug("asdf: " + title);
@@ -39,7 +39,10 @@ public class TestController {
 	}
 	
 	@PostMapping("/multiForm")
-	public String multiForm( @RequestPart MultipartFile[] upfile
+	public String multiForm(@RequestParam String title,
+							@RequestParam String content,
+							@RequestPart MultipartFile[] upfile
+						   //,@ModelAttribute Board board 
 						  //, @RequestPart UploadVo uploadVo
 						  ) {
 		//@ReuqestParam은 파일을 받을 수 있다.
@@ -48,6 +51,15 @@ public class TestController {
 		Long length = upfile[0].getSize();
 		log.debug("asdf: " + length);
 		return "redirect:/test/form";
+	}
+	
+	@ResponseBody
+	@PostMapping("/formData")
+	public Board formData(@RequestParam("title") String title,
+						  @RequestParam("content") String content,
+						  @RequestParam("upfile")MultipartFile[] upfile) {
+		Board board = new Board(title, content);
+		return board;
 	}
 	
 	@GetMapping("/consBasicForm")
@@ -59,10 +71,15 @@ public class TestController {
 	
 	@ResponseBody
 	@PostMapping("/requestBody")
+<<<<<<< HEAD
 	public Board requestBody(@RequestPart String title,
 			@RequestPart String content) {
 		log.debug("board: "+title + " "+ content);
 		Board board = new Board(title, content);
+=======
+	public Board requestBody(@RequestBody Board board
+							, @RequestBody MultipartFile[] upfile) {
+>>>>>>> d8ed4381ab6850e99737bddb6100c94752ff56ed
 		//submit=>값이 찍히긴 하지만 415 오류 json이 아니리서 requestBody가 파싱 못 해줌
 		return board;
 	}
@@ -76,9 +93,15 @@ public class TestController {
 	}
 	
 	@ResponseBody
+<<<<<<< HEAD
 	@GetMapping("/multiget")
 	public Board multiget(@ModelAttribute Board board) {
 		log.debug("board: "+board);
+=======
+	@PostMapping("/multiget")
+	public Board multiget(@ModelAttribute Board board
+						, @ModelAttribute MultipartFile[] upfile) {
+>>>>>>> d8ed4381ab6850e99737bddb6100c94752ff56ed
 		//Board board = new Board(title, content);
 		return board;
 	}
