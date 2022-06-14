@@ -73,6 +73,7 @@ public class TestController {
 	@PostMapping("/requestBody")
 	public Board requestBody(@RequestBody Board board
 							, @RequestBody MultipartFile[] upfile) {
+		log.debug("asdf: "+ board);
 		//submit=>값이 찍히긴 하지만 415 오류 json이 아니리서 requestBody가 파싱 못 해줌
 		return board;
 	}

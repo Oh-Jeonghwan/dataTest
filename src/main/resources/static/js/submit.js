@@ -32,17 +32,16 @@ let board = {
 		console.log(formData);
 		let data={
 			"title":$("#title").val(),
-			"content":$("#content").val(),
-			"upfile":$("#upfile").val()
+			"content":$("#content").val()
 		}
 		console.log(JSON.stringify(data));
 		$.ajax({
 			url:"/test/requestBody",
 			type:"post",
 			//data:formData,
-			//data:data
-			data:JSON.stringify(data),
-			contentType:"application/json; charset=utf-8",
+			data:data
+			//data:formData,
+			//contentType:"application/json; charset=utf-8",
 			//contentType:false,
 			dataType:"json",
 			processData: false,
