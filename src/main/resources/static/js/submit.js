@@ -29,16 +29,16 @@ let board = {
 		let title=$("#agtitle").val();
 		let content=$("#agcontent").val();
 		let data = {title:title, content:content};
-		let parseData = JSON.stringify(data);
-		console.log(parseData);
+		//let parseData = JSON.stringify(data);
+		//console.log(parseData);
 		$.ajax({
 			url:"/test/ajaxGet",
 			type:"get",
 			//data:data,
 			data:data,
-			contentType:"application/json; charset=utf-8", 
+			//contentType:"application/json; charset=utf-8", 
 			//이게 뭐?
-			//contentType: false,
+			contentType: false,
 			//processData: false, 
 			//cache: false,
 			dataType:"json", 
@@ -72,8 +72,7 @@ let board = {
 			success:function(data){
 				alert(data);
 				location.href="/test/form";
-		
-	
+			},
 			error:function(data){
 				console.log(data);
 			}
