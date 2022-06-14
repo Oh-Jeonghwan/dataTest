@@ -39,7 +39,7 @@ let board = {
 			url:"/test/requestBody",
 			type:"post",
 			//data:formData,
-			data:data
+			data:data,
 			//data:formData,
 			//contentType:"application/json; charset=utf-8",
 			//contentType:false,
