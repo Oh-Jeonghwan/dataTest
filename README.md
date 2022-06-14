@@ -68,7 +68,7 @@ content type이 따로 명시 되지 않기 때문에 multipart/form-data 방식
 
 
 ### 2. Post 방식으로 보낼 떄 콘텐트 타입에 따른 차이점(콘텐트 타입: Multipart/form-data, form-urlencoded, json)
-  - Multipart/form-data(form/submit으로 전송시(파일 있을 떄, 없을 때), jequery로 전송 시(파일 있을 때, 없을 때))
+  - Multipart/form-data(form/submit으로 전송시(파일 있을 때, 없을 때), jequery로 전송 시(파일 있을 때, 없을 때))
     - Multipart/form-data를 form/submit 방식으로 보낼 html
    
       ![@RequestaParam Post multipartformdata 뷰](https://user-images.githubusercontent.com/98066327/173475214-4ea31714-4594-4c71-a61b-ad3fdefd48e7.png)
