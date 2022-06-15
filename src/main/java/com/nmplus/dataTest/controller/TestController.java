@@ -40,8 +40,8 @@ public class TestController {
 	
 	@PostMapping("/multiForm")
 	public String multiForm(@RequestParam String title,
-							@RequestParam String content,
-							@RequestPart MultipartFile[] upfile
+							@RequestParam String content
+							, @RequestParam MultipartFile[] upfile
 						   //,@ModelAttribute Board board 
 						  //, @RequestPart UploadVo uploadVo
 						  ) {
@@ -56,8 +56,8 @@ public class TestController {
 	@ResponseBody
 	@PostMapping("/formData")
 	public Board formData(@RequestParam("title") String title,
-						  @RequestParam("content") String content,
-						  @RequestParam("upfile")MultipartFile[] upfile) {
+						  @RequestParam("content") String content
+						 ) {
 		Board board = new Board(title, content);
 		return board;
 	}
@@ -85,10 +85,10 @@ public class TestController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/multiget")
-	public Board multiget(@ModelAttribute Board board
-						, @ModelAttribute MultipartFile[] upfile) {
-		//Board board = new Board(title, content);
+	@GetMapping("/multiget")
+	public Board multiget(@RequestParam("title") String title,
+			  @RequestParam("content") String content) {
+		Board board = new Board(title, content);
 		return board;
 	}
 }

@@ -13,7 +13,7 @@ let board = {
 			url:"/test/formData",
 			type:"post",
 			data: formData,
-			contentType:false,
+			//contentType:false,
 			processData:false,
 			dataType:"json",
 			success:function(data){
@@ -86,17 +86,19 @@ let board = {
 	multiget:function(){
 		let form = $("#multiGet")[0];
 		let formData = new FormData(form);
+		console.log(formData);
+		  for (var pair of formData.entries()) {
+                console.log(pair[0]+ ', ' + pair[1]); 
+            }
 		let data={
 			title:$("#mtitle").val(),
-			content:$("#mcontent").val(),
-			upfile:$("#mupfile").val()
+			content:$("#mcontent").val()
 		}
-		console.log(JSON.stringify(data));
 		$.ajax({
 			url:"/test/multiget",
-			type:"post",
+			type:"get",
 			//data:data,
-			data:formData,
+			data:JSON.stringify(data),
 			//contentType:"application/json; charset=utf-8", 
 			//이게 뭐?
 			//contentType: false,

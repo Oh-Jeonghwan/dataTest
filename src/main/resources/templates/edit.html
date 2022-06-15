@@ -26,7 +26,7 @@
 	</form>
 	<br>
 	<p> 멀티파트 폼 파일 </p>
-	<form enctype="multipart/form-data" method="post" th:action="@{/test/multiForm}">
+	<form method="post" th:action="@{/test/multiForm}">
 		<input type="text" name="title">
 		<input type="text" name="content">
 		<input type="file" name="upfile">
@@ -37,7 +37,6 @@
 	<form method="post" th:action="@{/test/formData}" id="formData">
 		<input type="text" name="title">
 		<input type="text" name="content">
-		<input type="file" name="upfile">
 		<button type="button" th:onclick="javascript:board.formData();">확인</button>
 	</form>
 	<br>
@@ -64,10 +63,10 @@
 		<button type="button" th:onclick="javascript:board.ajaxGet();">확인</button>
 	</form>
 	<br>
-	<form th:action="@{/test/multiget}" id="multiGet" method="post" enctype="multipart/form-data">
+	<form th:action="@{/test/multiget}" id="multiGet" method="get">
 		<input type="text" name="title" id="mtitle">
 		<input type="text" name="content" id="mcontent">
-		<input type="file" name="upfile" id="mupfile">
+		
 		<button type="button" th:onclick="javascript:board.multiget();">ajax확인</button>
 		<button>확인</button>
 	</form>
