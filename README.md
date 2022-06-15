@@ -66,11 +66,13 @@ content type이 따로 명시 되지 않는다. get 방식에는 contentType이 
 
    @RequestParam에 Get 방식으로 요청할 때 contentType이 multipart/form-data, urlencoded 형태일 때는 쿼리스트링으로 들어오고 이를 파싱하여 잘 받아준다. 하지만 json 데이터일 때는 제대로 받지 못 하고 정보를 잃어버리게 되어 400에러가 난다.
 
+ 
 
 ### 2. Post 방식으로 보낼 때 콘텐트 타입에 따른 차이점(콘텐트 타입: Multipart/form-data, form-urlencoded, json)
-  - Multipart/form-data(form/submit으로 전송시(파일 있을 때, 없을 때), jequery로 전송 시(파일 있을 때, 없을 때))
+  
+  - Multipart/form-data(form/submit으로 전송시(파일 있을 때, 없을 때),  jequery로 전송 시(파일 있을 때, 없을 때))
     - Multipart/form-data를 form/submit 방식으로 보낼 html
-   
+    
       ![@RequestaParam Post multipartformdata 뷰](https://user-images.githubusercontent.com/98066327/173475214-4ea31714-4594-4c71-a61b-ad3fdefd48e7.png)
       
       - 파일 첨부 시 요청 헤더(form/submit 방식)
@@ -114,9 +116,10 @@ content type이 따로 명시 되지 않는다. get 방식에는 contentType이 
       - 파일 첨부 시: form/submit 방식과 달리 jquery 방식은 파일 첨부와 파일 미첨부 시와 동일하다.
       
     multipart/form-data type의 데이터를 @RequestParam으로 받게 된다면 웹킷 형태로 들어오고 그 데이터가 키:밸류 형태로 파싱되어 데이터를 읽을 수 있다.
-  
+ 
       
-  - form-urlencoded(이 방식으로는 파일을 보낼 수 없기에 form/submit 방식, jquery 방식 1번씩 진행)
+  - form-urlencoded(이 방식으로는 파일을 보낼 수 없기에 form/submit 방식, jquery 방식 1번씩만 진행)
+    
     - form/submit 방식으로 보낼 html
     
       ![@RequestParam urlencoded view](https://user-images.githubusercontent.com/98066327/173488001-9e37674f-d75b-49d2-92b4-dc1c53c8d9eb.png)
@@ -145,6 +148,7 @@ content type이 따로 명시 되지 않는다. get 방식에는 contentType이 
   - @RequestBody 는 파일을 받을 수 없다. (바이너리 방식으로 들어오는 파일은 json 형식을 받아서 javaObject로 파싱해주는 @RequestBody로는 받아줄 수 없다.)
 
 ### 1. Get 방식으로 보낼 때 콘텐트 타입에 따른 차이점(콘텐트 타입: Multipart/form-data, form-urlencoded, json) 
+   
   - 넘겨주는 뷰단
   
     ![@RequestBody Get 방식](https://user-images.githubusercontent.com/98066327/173621131-0ed598ca-cc1a-4f6d-8c7a-9b812e23ae87.jpg)
@@ -185,9 +189,10 @@ content type이 따로 명시 되지 않는다. get 방식에는 contentType이 
    - json 데이터 포스트맨으로 get 요청 시
     
       ![@RequestBody Get 방식 json전송 postman](https://user-images.githubusercontent.com/98066327/173626119-2cd4a45b-b77e-4eb1-baa0-d23d388101f7.jpg)
-      
+
 ### 2. Post 방식으로 보낼 때 콘텐트 타입에 따른 차이점(콘텐트 타입: Multipart/form-data, form-urlencoded, json)
-   - Multipart/form-data(form/submit으로 전송 시, jequery로 전송 시)
+   - Multipart/form-data(form/submit으로 전송 시, FormData를 jequery로 전송 시)
+
      - Multipart/form-data를 form/submit 방식으로 보낼 html
 
         ![post multipart form-data formsubmit 방식 파일 없을 때](https://user-images.githubusercontent.com/98066327/173631094-e16f16c7-d89a-4291-a07b-e8c21984f544.jpg)
@@ -227,7 +232,7 @@ content type이 따로 명시 되지 않는다. get 방식에는 contentType이 
 
    - form-urlencoded 
       - form-urlencoded 를 form/submit로 보낼 html
-      - 
+      
          ![post urlencoded formsubmit 방식 html](https://user-images.githubusercontent.com/98066327/173639217-81d7d68b-a3cd-4dd3-a4f5-176b76bb289c.jpg)
   
       - form-urlencoded 를 form/submit로 보낸 요청헤더
@@ -255,7 +260,7 @@ content type이 따로 명시 되지 않는다. get 방식에는 contentType이 
         ![@RequestBody post urlencoded(기본 ajax) 페이로드](https://user-images.githubusercontent.com/98066327/173640055-8b47daad-6102-45c8-93d6-9c457dfc4b96.png)
       
       @RequestBody의 form-urlencoded 방식의 post 전송은 form/submit 방식과 jquery 방식(FormData 전송)은 요청헤더도 다 같지만 페이로드 형태에서 차이가 난다(form/submit는 쿼리 스트링 형식/ jquery-FormData 전송 방식은 웹킷 형식). 그리고 두 방법 다  form-urlencode를 지원할 수 없다는 415 에러가 난다.
-      
+
    
    - JSON 방식
      - JSON data 전송 jquery 요청 시 javascript
@@ -279,14 +284,100 @@ content type이 따로 명시 되지 않는다. get 방식에는 contentType이 
       ![@RequestBody post json (파일 유)컨트롤러](https://user-images.githubusercontent.com/98066327/173646208-9a8beec6-34dd-4865-b7f7-3755af993958.png)
       
    
-   @RequestBody는 json xml 형태의 contentType를 받으며 생성자가 있어야 한다. 또한 바이너리 형태로 들어오는 파일은 받을 수 없으며 null 찍히게 된다.
-     
-    
+   @RequestBody는 get방식에서는 400 post 방식에서는 mutlipartform, urlencoded 형태 다 415 에러가 떴고, json 형식일 때는 get이든 post든 다 받아주었다. 다만 get 방식일 때는 제대로 된 json 데이터 형태로 보내기가 어렵다.(나는 실패) 
 
-        
-        
+## @ModelAttribute
+
+### @ModelAttribute는 파라미터 값으로 javaObject에 바인딩을 하는 방식이기 때문에 바인딩하려는 javaObject객체에 Setter메소드가 반드시 있어야 한다.
+
+### 1. Get 방식으로 보낼 때 콘텐트 타입에 따른 차이점(콘텐트 타입: Multipart/form-data, form-urlencoded, json)
+
+  - 넘겨주는 뷰단
+  
+    ![get방식 보낼 때 html](https://user-images.githubusercontent.com/98066327/173718748-721f8e10-2f25-4f39-829a-ccb5116a7288.png)
     
+  - get 요청 시 개발자 도구에서의 요청헤더
+  
+    ![get방식 보낼 때](https://user-images.githubusercontent.com/98066327/173718796-97381445-991e-434c-a69d-8cbb2bb2c173.png)
     
+  - get 요청 시 개발자 도구에서의 페이로드
+    
+    ![get방식 보낼 때 페이로드(파싱 전)](https://user-images.githubusercontent.com/98066327/173718846-a11afa74-0ef1-4bc6-9eee-20ce5aa30cf7.png)
+    파싱 전
+
+    ![get방식 보낼 때 페이로드(파싱 후)](https://user-images.githubusercontent.com/98066327/173718897-32606363-7145-4f78-92d8-02bf9e78f010.png)
+    파싱 후 
+ 
+ @ModelAttribute를 get 방식으로 보내주게 되면 앞에 @RequestParam 이나 @RequestBody와 마찬가지로 키=밸류&키=밸류 형식으로 넘어가서 키:밸류 의 형식으로 파싱되어 데이터가 넘어간다. 또한 get 방식에서는 contentType가 따로 명시되지 않는다.
+ 
+ #### JSON get 방식으로 요청 시
+   - json get 방식으로 넘겨주는 jquery
+    
+      ![get방식 Json 데이터 보낼 때 jquery ](https://user-images.githubusercontent.com/98066327/173721209-5adc2866-e008-4290-8fac-4c78c31ca044.png)
+   
+   - json get 방식으로 넘길 때 개발자 도구의 요청헤드
+    
+     ![get방식 Json 데이터 보낼 때 요청헤더](https://user-images.githubusercontent.com/98066327/173721311-d8d3d55c-8d7e-48a2-9391-85f00a5227a2.png)
+   
+   - json get 방식으로 넘길 때 페이로드
+     
+     ![get방식 Json 데이터 보낼 때 페이로드(파싱 전)](https://user-images.githubusercontent.com/98066327/173721385-5fa7d2d7-3929-40b8-b186-b68d977c630e.png)
+      파싱 전
+      
+      ![get방식 Json 데이터 보낼 때 페이로드(파싱 후)](https://user-images.githubusercontent.com/98066327/173721459-15419a0c-101c-4ae3-95ed-947f78c176e0.png)
+      파싱 후
+      
+   - json get 방식으로 넘길 때 오류 사항
+      
+      ![get방식 Json 데이터 보낼 때 jquery 에러사항](https://user-images.githubusercontent.com/98066327/173721664-f167f6e1-0147-4952-aea9-ba1a531edce9.png)
+      
+   json을 get 방식으로 보낼 때 @RequestBody 때와 마찬가지로 제대로 된 json 데이터가 들어가지 않으면서 오류가 난다. 제대로 된 json 데이터를 보내주기 위해 포스트맨으로 보내보자.
+   
+   - json 데이터 get 방식으로 postman을 통해 넘겨주기
+    
+      ![get방식 Json 데이터 보낼 때 포스트맨 ](https://user-images.githubusercontent.com/98066327/173722290-b59e55b2-9865-4df8-9872-e57cdc0bd518.png)
+   
+   제대로 된 json 데이터를 get 방식으로 포스트맨을 통해 보내게 되더라도 오류는 나지 않지만 @ModelAttribute가 제대로 받아주지 못 하여 null 값이 들어오는 현상이 발생한다.
+
+ ###2. POST 방식으로 보낼 때 콘텐트 타입에 따른 차이점(콘텐트 타입: Multipart/form-data, form-urlencoded, json)
+   - Multipart/form-data(form/submit 방식과 FormData를 보내는 jquery 방식)
+      - Multipart/form-data form/submit 방식 html
+    
+        ![멀티파트 폼데이터 폼 서브밋 html](https://user-images.githubusercontent.com/98066327/173734188-386b7c09-e504-4732-82d6-b6cb5ffd9c3c.png)
+      
+      - Multipart/form-data form/submit 요청헤더 (파일 첨부 시)
+   
+        ![멀티파트 폼데이터 폼 서브밋 요청헤더](https://user-images.githubusercontent.com/98066327/173734456-bc73cc8c-22aa-4292-9b0a-7a07773290c6.png)
+    
+      - Multipart/form-data form/submit 페이로드 (파일 미첨부 시)
+    
+        ![멀티파트 폼데이터 폼 서브밋 요청헤더 파일 미첨부시 페이로드](https://user-images.githubusercontent.com/98066327/173734374-83479d1b-fbb6-441e-b990-2ca16ad2c339.png)
+        
+      @RequestParam과 마찬가지로 파일 첨부 시에 페이로드 값이 안 찍히고, 파일 미첨부 시에는 페이로드 값이 찍히는 결과를 볼 수 있었다.
+   
+      - Multipart/form-data jquery 요청 방식 자바스크립트 
+        
+        ![멀티파트 폼데이터 제이쿼리 폼데이터 자바스크립트 html](https://user-images.githubusercontent.com/98066327/173734825-0b950373-5da8-4b06-a05e-6f8274d900b5.png)
+      
+      - Multipart/form-data jquery 요청 방식 요청 헤더
+
+        ![멀티파트 폼데이터 제이쿼리 폼데이터  요청헤더](https://user-images.githubusercontent.com/98066327/173735892-c6f469b6-342f-4990-8c4e-2311ca79ca14.png)
+
+      - Multipart/form-data jquery 요청 방식 페이로드
+    
+        ![멀티파트 폼데이터 제이쿼리 폼데이터 페이로드](https://user-images.githubusercontent.com/98066327/173735933-72e62e44-7b93-41d8-8373-4c677ca3f581.png)
+
+      @ModelAttribute가 FormData를 못 받아주는 것인지 모르겠으나 FormData를 Jquery를 통해 전송할 때 컨트롤러에 null 값이 들어가는 것을 확인할 수 있다.
+      
+        ![멀티파트 폼데이터 제이쿼리 폼데이터 백단](https://user-images.githubusercontent.com/98066327/173736294-ce4063f5-aace-407c-9f33-296bb2b29e7f.png)
+        
+      @ModelAttribute는 Multipart/form-data 타입의 데이터를 받아줄 수 있다. 하지만 form/submit 형식이 아니라 jquery를 통해 FormData를 넘기게 되면 에러는 안 나지만 null 값이 들어가게 되었다.
+      
+## @RequestPart
+
+  - @ReuquestPart는 Content-Type이 Multipart/form-data로 설정되어 요청이 들어올 때 사용할 수 있는 어노테이션으로 주로 파일을 받을 때 사용되는데 Multipart/form-data로 요청이 들어오면 파일 뿐만 아니라 다른 형태들도 받아줄 수 있다. 이는 @RequestParam과 마찬가지로 객체는 받지 못 하고 개별의 인자만 받아줄 수 있다.
+
+
 
 
 
