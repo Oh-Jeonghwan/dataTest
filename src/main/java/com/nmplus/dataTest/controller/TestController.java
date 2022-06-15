@@ -34,7 +34,7 @@ public class TestController {
 	@PostMapping("/basicForm")
 	public String basicForm(@RequestParam String title
 						  , @RequestParam String content){
-
+		log.debug("asdf: " + title);
 		return "redirect:/test/form";
 	}
 	
@@ -73,22 +73,33 @@ public class TestController {
 	@PostMapping("/requestBody")
 	public Board requestBody(@RequestBody Board board
 							, @RequestBody MultipartFile[] upfile) {
+		log.debug("asdf: "+ board);
 		//submit=>값이 찍히긴 하지만 415 오류 json이 아니리서 requestBody가 파싱 못 해줌
 		return board;
 	}
 	
 	@ResponseBody
 	@GetMapping("/ajaxGet")
-	public Board ajaxGet(@RequestBody Board board) {
-		//Board board = new Board(title, content);
+	public Board ajaxGet(@RequestParam String title
+			  , @RequestParam String content) {
+		Board board = new Board(title, content);
 		return board;
 	}
 	
+<<<<<<< HEAD
 	@ResponseBody
 	@GetMapping("/multiget")
 	public Board multiget(@RequestParam("title") String title,
 			  @RequestParam("content") String content) {
 		Board board = new Board(title, content);
+=======
+	
+	@PostMapping("/multiget")
+	public Board multiget(@ModelAttribute Board board
+						, @ModelAttribute MultipartFile[] upfile) {
+
+		//Board board = new Board(title, content);
+>>>>>>> 04bf8c0a7f63a7b0d93adad4e831949ca65fb373
 		return board;
 	}
 }
