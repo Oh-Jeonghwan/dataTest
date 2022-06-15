@@ -64,10 +64,10 @@ content type이 따로 명시 되지 않는다. get 방식에는 contentType이 
     post맨으로 요청 시 또한 400 에러가 나는데 이때 나는 에러는 json 데이터를 @RequestParam이 받아주지 못 하고 보내준 데이터를 잃어버리게 되어 생기는 에러이다.
 
 
-   @RequestParam에 Get 방식으로 요청할 때 contentType이 multipart/form-data, urlencoded 형태일 때는 쿼리스트링으로 들어오고 이를 파싱하여 잘 받아준다. 하지만 json 데이터일 떄는 제대로 받지 못 하고 정보를 잃어버리게 되어 400에러가 난다.
+   @RequestParam에 Get 방식으로 요청할 때 contentType이 multipart/form-data, urlencoded 형태일 때는 쿼리스트링으로 들어오고 이를 파싱하여 잘 받아준다. 하지만 json 데이터일 때는 제대로 받지 못 하고 정보를 잃어버리게 되어 400에러가 난다.
 
 
-### 2. Post 방식으로 보낼 떄 콘텐트 타입에 따른 차이점(콘텐트 타입: Multipart/form-data, form-urlencoded, json)
+### 2. Post 방식으로 보낼 때 콘텐트 타입에 따른 차이점(콘텐트 타입: Multipart/form-data, form-urlencoded, json)
   - Multipart/form-data(form/submit으로 전송시(파일 있을 때, 없을 때), jequery로 전송 시(파일 있을 때, 없을 때))
     - Multipart/form-data를 form/submit 방식으로 보낼 html
    
@@ -186,7 +186,7 @@ content type이 따로 명시 되지 않는다. get 방식에는 contentType이 
     
       ![@RequestBody Get 방식 json전송 postman](https://user-images.githubusercontent.com/98066327/173626119-2cd4a45b-b77e-4eb1-baa0-d23d388101f7.jpg)
       
-### 2. Post 방식으로 보낼 떄 콘텐트 타입에 따른 차이점(콘텐트 타입: Multipart/form-data, form-urlencoded, json)
+### 2. Post 방식으로 보낼 때 콘텐트 타입에 따른 차이점(콘텐트 타입: Multipart/form-data, form-urlencoded, json)
    - Multipart/form-data(form/submit으로 전송 시, jequery로 전송 시)
      - Multipart/form-data를 form/submit 방식으로 보낼 html
 
