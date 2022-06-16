@@ -63,13 +63,13 @@ let board = {
 		//console.log(parseData);
 		$.ajax({
 			url:"/test/ajaxGet",
-			type:"get",
-			//data:data,
+			type:"delete",
 			data:data,
+			//data:JSON.stringify(data),
 			//contentType:"application/json; charset=utf-8", 
 			//이게 뭐?
-			contentType: false,
-			//processData: false, 
+			//contentType: false,
+			processData: false, 
 			//cache: false,
 			dataType:"json", 
 			success:function(data){
@@ -85,19 +85,15 @@ let board = {
 	multiget:function(){
 		let form = $("#multiGet")[0];
 		let formData = new FormData(form);
-		console.log(formData);
-		  for (var pair of formData.entries()) {
-                console.log(pair[0]+ ', ' + pair[1]); 
-            }
 		let data={
 			title:$("#mtitle").val(),
 			content:$("#mcontent").val()
 		}
 		$.ajax({
 			url:"/test/multiget",
-			type:"get",
+			type:"post",
 			//data:data,
-			data:JSON.stringify(data),
+			data:formData,
 			//contentType:"application/json; charset=utf-8", 
 			//이게 뭐?
 			//contentType: false,

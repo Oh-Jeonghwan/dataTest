@@ -1,6 +1,7 @@
 package com.nmplus.dataTest.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -79,27 +80,22 @@ public class TestController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/ajaxGet")
-	public Board ajaxGet(@RequestParam String title
-			  , @RequestParam String content) {
+	@DeleteMapping("/ajaxGet")
+	public Board ajaxGet(
+			@RequestParam String title,
+			@RequestParam String content
+			) {
 		Board board = new Board(title, content);
 		return board;
 	}
 	
-<<<<<<< HEAD
 	@ResponseBody
-	@GetMapping("/multiget")
-	public Board multiget(@RequestParam("title") String title,
-			  @RequestParam("content") String content) {
-		Board board = new Board(title, content);
-=======
-	
 	@PostMapping("/multiget")
-	public Board multiget(@ModelAttribute Board board
+	public Board multiget(@RequestParam String title,
+						  @RequestParam String content
 						, @ModelAttribute MultipartFile[] upfile) {
 
-		//Board board = new Board(title, content);
->>>>>>> 04bf8c0a7f63a7b0d93adad4e831949ca65fb373
+		Board board = new Board(title, content);
 		return board;
 	}
 }

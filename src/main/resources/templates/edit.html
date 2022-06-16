@@ -57,17 +57,18 @@
 	</form>
 	<br>
 	<p>ajax get</p>
-	<form id="ajaxGet">
+	<form id="ajaxGet" th:action="@{/test/ajaxGet}" method="get">
 		<input type="text" name="title" id="agtitle">
 		<input type="text" name="content" id="agcontent">
-		<button type="button" th:onclick="javascript:board.ajaxGet();">확인</button>
+		<button type="button" th:onclick="javascript:board.ajaxGet();">ajax확인</button>
+		<button>확인</button>
 	</form>
 	<br>
-	<form th:action="@{/test/multiget}" id="multiGet" method="get">
+	<form th:action="@{/test/multiget}" id="multiGet" method="post" enctype="multipart/form-data">
 		<input type="text" name="title" id="mtitle">
 		<input type="text" name="content" id="mcontent">
-		
-		<button type="button" th:onclick="javascript:board.multiget();">ajax확인</button>
+		<input type="file" name="upfile">
+		<button type="button" th:onclick="javascript:board.multiget();">ajax확인</button>		
 		<button>확인</button>
 	</form>
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
