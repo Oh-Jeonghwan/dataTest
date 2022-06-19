@@ -1,7 +1,7 @@
 # 데이터 전송 방법
 ## @RequestParam
 
-### @RequestParam은 쿼리스트링을 통해 넘어오는 파라미터 값을 받는다. 주로 get방식과 사용되며, post나 put과 같이 사용될 때는 폼데이터 와 파라미터로 넘어오는 값들을 키-밸류 형태로 받을 수 있다.
+### @RequestParam은 head나 body를 통해 넘어오는 키=밸류&키=밸류 형태의 파라미터를 키:밸류의 형태로 파싱하여 데이터를 받는다(devtools의 페이로드 값을 보면 알 수 있다.). 주로 get방식과 사용되며, post나 put과 같이 사용될 때는 폼데이터로 넘어오는 값들을 받을 수 있다.
 
 - @RequestParam은 하나의 인자만 받을 수 있고 객체를 받지 못 한다.
 
@@ -12,7 +12,7 @@
 
   ![get 요청 시 html](https://user-images.githubusercontent.com/98066327/173469725-9b08ebe5-6e1d-487f-bd00-388e9495bb9d.png)
 
-- get 요청 시 개발자 도구에서의 유알엘 형태와 요청헤드
+- get 요청 시 개발자 도구에서의 유알엘 형태와 요청헤더
 
   ![get 요청 시 url과 헤더](https://user-images.githubusercontent.com/98066327/173469898-87bfc7de-857b-4378-91f5-6848dfd85420.png)
 
@@ -25,7 +25,7 @@
 (파싱 후)
 
   get 방식에서는 쿼리 스트링 형태로 넘어와 파싱되어 데이터로 읽힌다. 
-content type이 따로 명시 되지 않는다. get 방식에는 contentType이 없는 건지, 기본값이 form-urlencoded 타입이지만 body로 넘어가지 않기 때문에 나타나지 않는 것인지는 잘 모르겠다.
+content type이 따로 명시 되지 않는다(get 방식에는 contentType이 없는 건지, 아니면 기본값이 form-urlencoded 타입이지만 body로 넘어가지 않기 때문에 나타나지 않는 것인지는 잘 모르겠다).
 
 /
 
@@ -64,7 +64,7 @@ content type이 따로 명시 되지 않는다. get 방식에는 contentType이 
     post맨으로 요청 시 또한 400 에러가 나는데 이때 나는 에러는 json 데이터를 @RequestParam이 받아주지 못 하고 보내준 데이터를 잃어버리게 되어 생기는 에러이다.
 
 
-   @RequestParam에 Get 방식으로 요청할 때 contentType이 multipart/form-data, urlencoded 형태일 때는 쿼리스트링으로 들어오고 이를 파싱하여 잘 받아준다. 하지만 json 데이터일 때는 제대로 받지 못 하고 정보를 잃어버리게 되어 400에러가 난다.
+   Get 방식의요청은 body가 아닌 head로 보내주는 메소드이고 이를 통해 데이터를 보내주게 되면 쿼리스트링으로 들어오고 이를 파싱하여 잘 받아준다. 하지만 json 데이터일 때는 쿼리스트링으로 보내줄 수 없기에 제대로 받지 못 하고 정보를 잃어버리게 되어 400에러가 난다.
 
  
 
@@ -102,7 +102,7 @@ content type이 따로 명시 되지 않는다. get 방식에는 contentType이 
     - Multipart/fomr-data jquery로 보냈을 때
    
       - 파일 첨부 시 요청 헤더(jquery 방식)
-      - 
+      
         ![jquery방식 요청헤더 파일 미첨부](https://user-images.githubusercontent.com/98066327/173487191-a912f4f8-ceb2-4491-9e63-545bfa9c4917.png)
       
       - 파일 미첨부 시 페이로드
@@ -141,11 +141,19 @@ content type이 따로 명시 되지 않는다. get 방식에는 contentType이 
    
     form-urlencoded 형태는 파일이나 jquery를 통해 폼데이터를 보낼 수 없고 @RequestParam으로 받는다면 쿼리스트링과 같은 형식의 키=밸류&키=밸류 형태로 데이터를 보내 키:밸류 형태로 파싱 하여 데이터를 읽게 된다.
 
+### 3. Put 방식으로 보낼 때 콘텐트 타입에 따른 차이점
+  - Put 방식은 head가 아닌 body로 data를 보내준다는 점에서 Post 방식과 같기 때문에 Post 방식과 같은 결과를 얻을 수 있었다. 그러나 Put 방식은 성공 응답의 body가 존재하지 않는다(Successful response has body: No)는 점에서 Post 방식과 비교 되는데 이는 어떻게 확인해야할지를 몰라 확인하지 못 했다. (put 방식은 html에서 지원하지 않기 때문에 Jquery 방식으로만 실습을 진행하였다.)
+
+### 4. Delete 방식으로 보낼 때 콘텐트 타입에 따른 차이점
+  - Delete 방식은 head와 body 모두를 통해 data를 보낼 수 있으며 body로 data 전송할 때는 Post방식과 같은 결과를 얻을 수 있었다. 하지만 Jquery로 head로 보내는 방식을 구현하지 못 해서 postman 방식으로 실습을 하였다. (delete 방식은 html에서 지원하지 않기 때문에 Jquery 방식과 postman을 통해서 실습을 진행하였다.)
+  potman을 통한 결과
+  ![화면 캡처 2022-06-20 011844](https://user-images.githubusercontent.com/98066327/174490527-f268b8df-c110-4c12-9775-8de822443f13.png)
+
 ## @RequestBody
 
-### @RequestBody 는 요청 본문의 body에 json이나 xml 값으로 요청을 하여 HttpMessageConverter를 거쳐 javaObject에 맞는 타입으로 바꿔서 바인딩을 시켜준다. Http request message 를 역직렬화(javaObject로 파싱) 해주는 역할을 한다. 따라서 기본생성자가 필요하다.(객체에 데이터를 써주는 게 아니라 넘어온 데이터를 javaObject로 변환해주기 때문에 setter 메소드는 필요없다.) 
+### @RequestBody 는 요청 head가 아닌 body에 있는 데이터를 받아주며 json이나 xml 값으로 요청을 하여 HttpMessageConverter를 거쳐 javaObject에 맞는 타입으로 바꿔서 바인딩을 시켜준다. Http request message 를 역직렬화(javaObject로 파싱) 해주는 역할을 한다. 따라서 기본생성자가 필요하다.(객체에 데이터를 써주는 게 아니라 넘어온 데이터를 javaObject로 변환해주기 때문에 setter 메소드는 필요없다.) 
   *직렬화: 자바 시스템 내부에서 사용되는 Object 또는 Data를 외부의 자바 시스템에서도 사용할 수 있도록 byte 형태로 데이터를 변환하는 기술.
-  - @RequestBody 는 파일을 받을 수 없다. (바이너리 방식으로 들어오는 파일은 json 형식을 받아서 javaObject로 파싱해주는 @RequestBody로는 받아줄 수 없다.)
+  - @RequestBody 는 파일을 받을 수 없다. (파일은 바이너리(이진법 형태) 형식을 들어오는데 @RequestBody 형식은 이를 지원하지 않고 null 값으로 바인딩 된다.)
 
 ### 1. Get 방식으로 보낼 때 콘텐트 타입에 따른 차이점(콘텐트 타입: Multipart/form-data, form-urlencoded, json) 
    
@@ -166,6 +174,11 @@ content type이 따로 명시 되지 않는다. get 방식에는 contentType이 
     파싱 후
     
     @RequestParam과 마찬가지로 요청헤더에 contentType이 명시되어 있지 않고, 데이터 또한 쿼리스트링 형식(키=밸류&키=밸류)으로 넘어와 키:밸류 의 형태로 파싱이 된다.
+    
+  - get 방식으로 보낼 시 에러
+
+    ![@RequestBody get 방식으로 보낼 시 오류](https://user-images.githubusercontent.com/98066327/174483950-5f70986c-cc58-46bd-b274-e35c78302e99.jpg)
+
     
     #### JSON Data를 get으로 넘겨줄 때
     - 넘겨주는 javascript
@@ -283,8 +296,13 @@ content type이 따로 명시 되지 않는다. get 방식에는 contentType이 
       
       ![@RequestBody post json (파일 유)컨트롤러](https://user-images.githubusercontent.com/98066327/173646208-9a8beec6-34dd-4865-b7f7-3755af993958.png)
       
+### 3. Put 방식으로 보낼 때 콘텐트 타입에 따른 차이점
+  - Put 방식은 head가 아닌 body로 data를 보내준다는 점에서 Post 방식과 같기 때문에 Post 방식과 같은 결과를 얻을 수 있었다. 그러나 Put 방식은 성공 응답의 body가 존재하지 않는다(Successful response has body: No)는 점에서 Post 방식과 비교 되는데 이는 어떻게 확인해야할지를 몰라 확인하지 못 했다. (put 방식은 html에서 지원하지 않기 때문에 Jquery 방식으로만 실습을 진행하였다.)
+      
+### 4. Delete 방식으로 보낼 때 콘텐트 타입에 따른 차이점
+  - Delete 방식은 head와 body 모두를 통해 data를 보낼 수 있으며 body로 data 전송할 때는 Post방식과 같은 결과를 얻을 수 있었다. 
    
-   @RequestBody는 get방식에서는 400 post 방식에서는 mutlipartform, urlencoded 형태 다 415 에러가 떴고, json 형식일 때는 get이든 post든 다 받아주었다. 다만 get 방식일 때는 제대로 된 json 데이터 형태로 보내기가 어렵다.(나는 실패) 
+   @RequestBody는 get방식에서는 400 post 방식에서는 mutlipartform, urlencoded 형태 다 415 에러가 떴고, json 형식일 때는 어떤 method든 다 받아주었다. 다만 get 방식일 때는 제대로 된 json 데이터 형태로 보내기가 어렵다.(나는 실패) 
 
 ## @ModelAttribute
 
@@ -339,7 +357,7 @@ content type이 따로 명시 되지 않는다. get 방식에는 contentType이 
    
    제대로 된 json 데이터를 get 방식으로 포스트맨을 통해 보내게 되더라도 오류는 나지 않지만 @ModelAttribute가 제대로 받아주지 못 하여 null 값이 들어오는 현상이 발생한다.
 
- ###2. POST 방식으로 보낼 때 콘텐트 타입에 따른 차이점(콘텐트 타입: Multipart/form-data, form-urlencoded, json)
+ ### 2. POST 방식으로 보낼 때 콘텐트 타입에 따른 차이점(콘텐트 타입: Multipart/form-data, form-urlencoded, json)
    - Multipart/form-data(form/submit 방식과 FormData를 보내는 jquery 방식)
       - Multipart/form-data form/submit 방식 html
     
@@ -366,16 +384,42 @@ content type이 따로 명시 되지 않는다. get 방식에는 contentType이 
       - Multipart/form-data jquery 요청 방식 페이로드
     
         ![멀티파트 폼데이터 제이쿼리 폼데이터 페이로드](https://user-images.githubusercontent.com/98066327/173735933-72e62e44-7b93-41d8-8373-4c677ca3f581.png)
-
-      @ModelAttribute가 FormData를 못 받아주는 것인지 모르겠으나 FormData를 Jquery를 통해 전송할 때 컨트롤러에 null 값이 들어가는 것을 확인할 수 있다.
-      
-        ![멀티파트 폼데이터 제이쿼리 폼데이터 백단](https://user-images.githubusercontent.com/98066327/173736294-ce4063f5-aace-407c-9f33-296bb2b29e7f.png)
         
-      @ModelAttribute는 Multipart/form-data 타입의 데이터를 받아줄 수 있다. 하지만 form/submit 형식이 아니라 jquery를 통해 FormData를 넘기게 되면 에러는 안 나지만 null 값이 들어가게 되었다.
+      @ModelAttribute는 Multipart/form-data 타입의 데이터를 받아줄 수 있다.
+      
+### 3. Put 방식으로 보낼 때 콘텐트 타입에 따른 차이점
+  - Put 방식은 head가 아닌 body로 data를 보내준다는 점에서 Post 방식과 같기 때문에 Post 방식과 같은 결과를 얻을 수 있었다. 그러나 Put 방식은 성공 응답의 body가 존재하지 않는다(Successful response has body: No)는 점에서 Post 방식과 비교 되는데 이는 어떻게 확인해야할지를 몰라 확인하지 못 했다. (put 방식은 html에서 지원하지 않기 때문에 Jquery 방식으로만 실습을 진행하였다.)
+      
+### 4. Delete 방식으로 보낼 때 콘텐트 타입에 따른 차이점
+  - Delete 방식은 head와 body 모두를 통해 data를 보낼 수 있으며 body로 data 전송할 때는 Post방식과 같은 결과를 얻을 수 있었다. 쿼리 스트링을 통해 head로 @RequestParam과 마찬가지로 
       
 ## @RequestPart
 
   - @ReuquestPart는 Content-Type이 Multipart/form-data로 설정되어 요청이 들어올 때 사용할 수 있는 어노테이션으로 주로 파일을 받을 때 사용되는데 Multipart/form-data로 요청이 들어오면 파일 뿐만 아니라 다른 형태들도 받아줄 수 있다. 이는 @RequestParam과 마찬가지로 객체는 받지 못 하고 개별의 인자만 받아줄 수 있다.
+
+
+## 혼용 시
+
+## 
+
+
+## Consumes & Produces
+
+Consumes: 받을 데이터의 미디어 타입의 목록을 지정해서 주요한 매핑을 제한하는 것, 요청 헤더의 Content-Type이 consumes에 지정한 미디어 타입과 일치할 때만 매칭된다. 
+
+Produces: 보낼 데이터의 미디어 타입의 목록을 지정해서 주요 매핑을 제한 하는 것, 요청 헤더의 Accept가 이러한 값 중 하나와 일치할 때만 요청이 매칭 된다. 
+
+  Ex) 
+
+  @RestConroller 
+
+  @RequestMapping(value=”/주소”, method=~, consumes=”application/json”) 
+
+  public String 메소드이름(){} 
+
+  @RequestMapping(value=”/주소”, method=~, produces=”application/json”) 
+
+  public String 메소드이름(){} 
 
 
 
