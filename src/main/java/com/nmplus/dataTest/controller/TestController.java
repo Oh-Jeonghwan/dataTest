@@ -1,19 +1,20 @@
 package com.nmplus.dataTest.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.nmplus.dataTest.vo.Board;
-import com.nmplus.dataTest.vo.UploadVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,7 +28,7 @@ public class TestController {
 	}
 	
 	@GetMapping("/getForm")
-	public String getForm(Board board){
+	public String getForm(@RequestBody Board board){
 		
 		return "redirect:/test/form";
 	}
@@ -71,7 +72,7 @@ public class TestController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/requestBody")
+	@PutMapping("/requestBody")
 	public Board requestBody(@RequestBody Board board
 							, @RequestBody MultipartFile[] upfile) {
 		log.debug("asdf: "+ board);
@@ -86,16 +87,17 @@ public class TestController {
 			@RequestParam String content
 			) {
 		Board board = new Board(title, content);
+		log.debug("asdf"+board);
 		return board;
 	}
 	
 	@ResponseBody
 	@PostMapping("/multiget")
-	public Board multiget(@RequestParam String title,
-						  @RequestParam String content
+	public Board multiget(final @Valid @ModelAttribute Board board
 						, @ModelAttribute MultipartFile[] upfile) {
-
-		Board board = new Board(title, content);
+		log.debug("asdf"+board);
+		//log.debug("asdf: "+upfile[0].getOriginalFilename());
+		//Board board = new Board(title, content);
 		return board;
 	}
 }
