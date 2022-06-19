@@ -400,7 +400,7 @@ content type이 따로 명시 되지 않는다(get 방식에는 contentType이 �
 
 ## 혼용 시
 
-## 
+## 하나의 annotation에 여러 개의 value
 
 
 ## Consumes & Produces
