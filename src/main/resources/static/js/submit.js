@@ -92,7 +92,7 @@ let board = {
 			content:$("#mcontent").val()
 		}
 		$.ajax({
-			url:"/test/multiget",
+			url:"/test/multiget?title=asdf&content=asdf",
 			type:"delete",
 			//data:data,
 			data:formData,
