@@ -31,17 +31,17 @@ let board = {
 		let formData = new FormData(form);
 		console.log(formData);
 		let data={
-			"title":$("#title").val(),
-			"content":$("#content").val()
+			title:$("#title").val(),
+			content:$("#content").val()
 		}
 		console.log(JSON.stringify(data));
 		$.ajax({
 			url:"/test/requestBody",
-			type:"post",
+			type:"delete",
 			//data:formData,
-			data:data,
+			data:JSON.stringify(data),
 			//data:formData,
-			//contentType:"application/json; charset=utf-8",
+			contentType:"application/json; charset=utf-8",
 			//contentType:false,
 			dataType:"json",
 			processData: false,
@@ -56,6 +56,8 @@ let board = {
 	},
 	
 	ajaxGet:function(){
+		let form = $("#ajaxGet")[0];
+		let formData = new FormData(form);
 		let title=$("#agtitle").val();
 		let content=$("#agcontent").val();
 		let data = {title:title, content:content};
@@ -64,17 +66,22 @@ let board = {
 		$.ajax({
 			url:"/test/ajaxGet",
 			type:"delete",
-			data:data,
+			data:formData,
 			//data:JSON.stringify(data),
 			//contentType:"application/json; charset=utf-8", 
 			//이게 뭐?
+<<<<<<< HEAD
 			//contentType: false,
 			//processData: false, 
+=======
+			contentType: false,
+			processData: false, 
+>>>>>>> 8425b4f5b773f747778f659df3603eb624baa4a9
 			//cache: false,
 			//dataType:"json", 
 			success:function(data){
 				alert(data);
-				location.href="/test/form";
+				//location.href="/test/form";
 			},
 			error:function(data){
 				console.log(data);
@@ -102,7 +109,7 @@ let board = {
 			dataType:"json", 
 			success:function(data){
 				alert(data);
-				location.href="/test/form";
+				//location.href="/test/form";
 			},
 			error:function(data){
 				console.log(data);

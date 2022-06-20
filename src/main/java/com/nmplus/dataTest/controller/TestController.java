@@ -1,5 +1,7 @@
 package com.nmplus.dataTest.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +28,7 @@ public class TestController {
 	}
 	
 	@GetMapping("/getForm")
-	public String getForm(Board board){
+	public String getForm(@RequestBody Board board){
 		
 		return "redirect:/test/form";
 	}
@@ -70,7 +72,7 @@ public class TestController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/requestBody")
+	@PutMapping("/requestBody")
 	public Board requestBody(@RequestBody Board board
 							, @RequestBody MultipartFile[] upfile) {
 		log.debug("asdf: "+ board);
@@ -85,10 +87,12 @@ public class TestController {
 			@RequestParam String content
 			) {
 		Board board = new Board(title, content);
+		log.debug("asdf"+board);
 		return board;
 	}
 	
 	@ResponseBody
+<<<<<<< HEAD
 	@DeleteMapping("/multiget")
 	public Board multiget(@RequestParam String title,
 						  @RequestParam String content
@@ -96,6 +100,14 @@ public class TestController {
 		String name = upfile[0].getOriginalFilename();
 
 		Board board = new Board(title, content);
+=======
+	@PostMapping("/multiget")
+	public Board multiget(final @Valid @ModelAttribute Board board
+						, @ModelAttribute MultipartFile[] upfile) {
+		log.debug("asdf"+board);
+		//log.debug("asdf: "+upfile[0].getOriginalFilename());
+		//Board board = new Board(title, content);
+>>>>>>> 8425b4f5b773f747778f659df3603eb624baa4a9
 		return board;
 	}
 }
