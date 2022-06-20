@@ -69,9 +69,9 @@ let board = {
 			//contentType:"application/json; charset=utf-8", 
 			//이게 뭐?
 			//contentType: false,
-			processData: false, 
+			//processData: false, 
 			//cache: false,
-			dataType:"json", 
+			//dataType:"json", 
 			success:function(data){
 				alert(data);
 				location.href="/test/form";
@@ -91,12 +91,12 @@ let board = {
 		}
 		$.ajax({
 			url:"/test/multiget",
-			type:"post",
+			type:"delete",
 			//data:data,
 			data:formData,
 			//contentType:"application/json; charset=utf-8", 
 			//이게 뭐?
-			//contentType: false,
+			contentType: false,
 			processData: false, 
 			//cache: false,
 			dataType:"json", 
