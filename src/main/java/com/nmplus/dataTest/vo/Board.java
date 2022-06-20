@@ -1,8 +1,5 @@
 package com.nmplus.dataTest.vo;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,10 +13,6 @@ import lombok.ToString;
 @ToString
 @Builder
 public class Board {
-	
-	@NotNull
 	private String title;
-	
-	@Email
 	private String content;
 }

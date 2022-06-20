@@ -1,7 +1,5 @@
 package com.nmplus.dataTest.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -92,22 +90,12 @@ public class TestController {
 	}
 	
 	@ResponseBody
-<<<<<<< HEAD
 	@DeleteMapping("/multiget")
-	public Board multiget(@RequestParam String title,
-						  @RequestParam String content
-						, @RequestParam MultipartFile[] upfile) {
-		String name = upfile[0].getOriginalFilename();
-
-		Board board = new Board(title, content);
-=======
-	@PostMapping("/multiget")
-	public Board multiget(final @Valid @ModelAttribute Board board
+	public Board multiget(@ModelAttribute Board board
 						, @ModelAttribute MultipartFile[] upfile) {
 		log.debug("asdf"+board);
 		//log.debug("asdf: "+upfile[0].getOriginalFilename());
 		//Board board = new Board(title, content);
->>>>>>> 8425b4f5b773f747778f659df3603eb624baa4a9
 		return board;
 	}
 }

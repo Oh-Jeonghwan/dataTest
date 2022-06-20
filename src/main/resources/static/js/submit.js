@@ -70,13 +70,8 @@ let board = {
 			//data:JSON.stringify(data),
 			//contentType:"application/json; charset=utf-8", 
 			//이게 뭐?
-<<<<<<< HEAD
 			//contentType: false,
 			//processData: false, 
-=======
-			contentType: false,
-			processData: false, 
->>>>>>> 8425b4f5b773f747778f659df3603eb624baa4a9
 			//cache: false,
 			//dataType:"json", 
 			success:function(data){
