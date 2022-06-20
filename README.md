@@ -405,21 +405,21 @@ content type이 따로 명시 되지 않는다(get 방식에는 contentType이 �
 
 ## Consumes & Produces
 
-Consumes: 받을 데이터의 미디어 타입의 목록을 지정해서 주요한 매핑을 제한하는 것, 요청 헤더의 Content-Type이 consumes에 지정한 미디어 타입과 일치할 때만 매칭된다. 
+  - Consumes: 받을 데이터의 미디어 타입의 목록을 지정해서 주요한 매핑을 제한하는 것, 요청 헤더의 Content-Type이 consumes에 지정한 미디어 타입과 일치할 때만 매칭된다. 
 
-Produces: 보낼 데이터의 미디어 타입의 목록을 지정해서 주요 매핑을 제한 하는 것, 요청 헤더의 Accept가 이러한 값 중 하나와 일치할 때만 요청이 매칭 된다. 
+  - Produces: 보낼 데이터의 미디어 타입의 목록을 지정해서 주요 매핑을 제한 하는 것, 요청 헤더의 Accept가 이러한 값 중 하나와 일치할 때만 요청이 매칭 된다. 
 
-  Ex) 
+      Ex) 
 
-  @RestConroller 
+      @RestConroller 
 
-  @RequestMapping(value=”/주소”, method=~, consumes=”application/json”) 
+      @RequestMapping(value=”/주소”, method=~, consumes=”application/json”) 
 
-  public String 메소드이름(){} 
+      public String 메소드이름(){} 
 
-  @RequestMapping(value=”/주소”, method=~, produces=”application/json”) 
+      @RequestMapping(value=”/주소”, method=~, produces=”application/json”) 
 
-  public String 메소드이름(){} 
+      public String 메소드이름(){} 
 
 
 
